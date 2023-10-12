@@ -9,41 +9,17 @@ import SwiftUI
 
 struct ArtistsView: View {
     
-    @StateObject var api = DataManager()
+    @StateObject private var api = DataManager()
     @State private var artists = [Artist]()
     @State private var artistImages = [String:UIImage]()
-    @State private var searchedArtist: String = ""
-    
-    let genres: [String] = ["All", "Punk", "Country", "Pop", "Synthpop", "Goth", "Metal", "Dance", "Folk", "Blues", "Rock"]
-    @State private var selectedGenre: String = "All"
+    @State private var selectedGenre = "All"
     
     var body: some View {
         NavigationStack{
             ScrollView(.vertical, showsIndicators: false){
-                ScrollView(.horizontal, showsIndicators: false){
-                    HStack(spacing: 10){
-                        ForEach(genres, id:\.self) { genre in
-                            GenreButton(genre: genre, isSelected: genre == selectedGenre)
-                                .onTapGesture {
-                                    selectedGenre = genre
-                                }
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                }
-                .padding(.vertical, 20)
-                VStack{
-                    if selectedGenre == "All"{
-                        ForEach(artists){ artist in
-                            ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
-                        }
-                    } else {
-                        let filtredArtists = artists.filter { $0.genre == selectedGenre }
-                        ForEach(filtredArtists){ artist in
-                            ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
-                        }
-                    }
-                }
+                GenreButtonsView(selectedGenre: $selectedGenre)
+                    .padding(.vertical, 15)
+                ArtistsListView(artists: artists, artistImages: artistImages, selectedGenre: selectedGenre)
             }
             .fontDesign(.rounded)
             .navigationTitle("Artists")
@@ -51,23 +27,45 @@ struct ArtistsView: View {
         .onAppear(){
             api.fetchArtists { artists in
                 self.artists = artists
-                
-                for artist in artists {
-                    api.fetchArtistImage(artistName: artist.name) { image in
-                        if let image = image{
-                            artistImages[artist.name] = image
-                        }
-                    }
+                fetchArtistsImages(artists: artists)
+            }
+        }
+    }
+    
+    private func fetchArtistsImages(artists: [Artist]){
+        for artist in artists {
+            api.fetchArtistImage(artistName: artist.name) { image in
+                if let image = image{
+                    artistImages[artist.name] = image
                 }
             }
         }
     }
 }
 
+struct GenreButtonsView: View {
+    let genres: [String] = ["All", "Punk", "Country", "Pop", "Synthpop", "Goth", "Metal", "Dance", "Folk", "Blues", "Rock"]
+    @Binding var selectedGenre: String
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false){
+            HStack(spacing: 10){
+                ForEach(genres, id:\.self) { genre in
+                    GenreButton(genre: genre, isSelected: genre == selectedGenre)
+                        .onTapGesture {
+                            selectedGenre = genre
+                        }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
 
 struct GenreButton: View {
-    var genre: String
+    let genre: String
     var isSelected: Bool
+    
     var body: some View {
         Text(genre)
             .foregroundStyle(isSelected ? .white : .black)
@@ -83,9 +81,29 @@ struct GenreButton: View {
     }
 }
 
-struct ArtistCard: View {
+struct ArtistsListView: View {
+    let artists: [Artist]
+    let artistImages: [String: UIImage]
+    var selectedGenre: String
     
-    var artist: Artist
+    var body: some View {
+        VStack{
+            if selectedGenre == "All"{
+                ForEach(artists){ artist in
+                    ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
+                }
+            } else {
+                let filtredArtists = artists.filter { $0.genre == selectedGenre }
+                ForEach(filtredArtists){ artist in
+                    ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
+                }
+            }
+        }
+    }
+}
+
+struct ArtistCard: View {
+    let artist: Artist
     let artistImage: UIImage
     
     var body: some View {

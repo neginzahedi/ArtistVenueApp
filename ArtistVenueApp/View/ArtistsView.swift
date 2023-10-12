@@ -46,8 +46,6 @@ struct ArtistsView: View {
                 }
             }
             .fontDesign(.rounded)
-            
-            .searchable(text: $searchedArtist)
             .navigationTitle("Artists")
         }
         .onAppear(){

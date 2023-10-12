@@ -8,19 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0FB7C3632AD8367C002A3ED5 /* ArtistVenueAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3622AD8367C002A3ED5 /* ArtistVenueAppApp.swift */; };
-		0FB7C3652AD8367C002A3ED5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3642AD8367C002A3ED5 /* ContentView.swift */; };
+		0FB7C3652AD8367C002A3ED5 /* ArtistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3642AD8367C002A3ED5 /* ArtistsView.swift */; };
 		0FB7C3672AD8367D002A3ED5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB7C3662AD8367D002A3ED5 /* Assets.xcassets */; };
 		0FB7C36A2AD8367D002A3ED5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FB7C3692AD8367D002A3ED5 /* Preview Assets.xcassets */; };
 		0FB7C3712AD838FF002A3ED5 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3702AD838FF002A3ED5 /* Artist.swift */; };
 		0FB7C3732AD83905002A3ED5 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3722AD83905002A3ED5 /* Venue.swift */; };
 		0FB7C3752AD83910002A3ED5 /* ArtistPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3742AD83910002A3ED5 /* ArtistPerformance.swift */; };
 		0FB7C3782AD83A14002A3ED5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3772AD83A14002A3ED5 /* DataManager.swift */; };
+		0FB7C37D2AD83EE2002A3ED5 /* ArtistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C37C2AD83EE2002A3ED5 /* ArtistDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0FB7C35F2AD8367C002A3ED5 /* ArtistVenueApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistVenueApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FB7C3622AD8367C002A3ED5 /* ArtistVenueAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistVenueAppApp.swift; sourceTree = "<group>"; };
-		0FB7C3642AD8367C002A3ED5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0FB7C3642AD8367C002A3ED5 /* ArtistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsView.swift; sourceTree = "<group>"; };
 		0FB7C3662AD8367D002A3ED5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FB7C3692AD8367D002A3ED5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0FB7C3702AD838FF002A3ED5 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -28,6 +29,7 @@
 		0FB7C3742AD83910002A3ED5 /* ArtistPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPerformance.swift; sourceTree = "<group>"; };
 		0FB7C3772AD83A14002A3ED5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0FB7C37B2AD83A9A002A3ED5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0FB7C37C2AD83EE2002A3ED5 /* ArtistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +102,8 @@
 		0FB7C37A2AD83A2D002A3ED5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FB7C3642AD8367C002A3ED5 /* ContentView.swift */,
+				0FB7C3642AD8367C002A3ED5 /* ArtistsView.swift */,
+				0FB7C37C2AD83EE2002A3ED5 /* ArtistDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,10 +179,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FB7C3712AD838FF002A3ED5 /* Artist.swift in Sources */,
+				0FB7C37D2AD83EE2002A3ED5 /* ArtistDetailView.swift in Sources */,
 				0FB7C3782AD83A14002A3ED5 /* DataManager.swift in Sources */,
 				0FB7C3732AD83905002A3ED5 /* Venue.swift in Sources */,
 				0FB7C3752AD83910002A3ED5 /* ArtistPerformance.swift in Sources */,
-				0FB7C3652AD8367C002A3ED5 /* ContentView.swift in Sources */,
+				0FB7C3652AD8367C002A3ED5 /* ArtistsView.swift in Sources */,
 				0FB7C3632AD8367C002A3ED5 /* ArtistVenueAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

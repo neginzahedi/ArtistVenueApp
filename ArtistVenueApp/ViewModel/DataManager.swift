@@ -93,4 +93,22 @@ class DataManager: ObservableObject {
             completion(nil)
         }
     }
+    
+    // Fetch venue image
+    func fetchVenueImage(venueName: String, completion: @escaping (UIImage?) -> Void) {
+        let imageName = venueName.replacingOccurrences(of: " ", with: "+") + ".png"
+        let urlString = "\(BASE_IMG_URL)/venues/\(imageName)"
+        
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    completion(image)
+                } else {
+                    completion(nil)
+                }
+            }.resume()
+        } else {
+            completion(nil)
+        }
+    }
 }

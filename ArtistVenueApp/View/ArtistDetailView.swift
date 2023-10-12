@@ -11,8 +11,34 @@ struct ArtistDetailView: View {
     
     var artist: Artist
     
+    @StateObject var api = DataManager()
+    
+    @State var performances = [ArtistPerformance]()
+    @State private var artistImage: UIImage?
+    
     var body: some View {
-        Text(artist.name)
+        VStack{
+            Image(uiImage: artistImage ?? UIImage())
+                .resizable()
+                .frame(width: 200, height: 200)
+            Text(artist.name)
+            List(performances){ performance in
+                HStack{
+                    Text(performance.venue.name)
+                    Text(performance.date)
+                }
+            }
+        }
+        
+        .onAppear(){
+            api.fetchArtistPerformances(artistID: artist.id) { performances in
+                self.performances = performances
+            }
+            
+            api.fetchArtistImage(artistName: artist.name) { image in
+                self.artistImage = image
+            }
+        }
     }
 }
 

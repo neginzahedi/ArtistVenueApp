@@ -12,6 +12,7 @@ struct ArtistsView: View {
     @StateObject var api = DataManager()
     @State private var artists = [Artist]()
     @State private var artistImages = [String:UIImage]()
+    @State private var searchedArtist: String = ""
     
     let genres: [String] = ["All", "Punk", "Country", "Pop", "Synthpop", "Goth", "Metal", "Dance", "Folk", "Blues", "Rock"]
     @State private var selectedGenre: String = "All"
@@ -22,8 +23,7 @@ struct ArtistsView: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 10){
                         ForEach(genres, id:\.self) { genre in
-                            Text(genre)
-                                .foregroundStyle(selectedGenre == genre ? .red : .black)
+                            GenreButton(genre: genre, isSelected: genre == selectedGenre)
                                 .onTapGesture {
                                     selectedGenre = genre
                                 }
@@ -35,20 +35,20 @@ struct ArtistsView: View {
                 VStack{
                     if selectedGenre == "All"{
                         ForEach(artists){ artist in
-                            ArtistCardView(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
+                            ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
                         }
                     } else {
                         let filtredArtists = artists.filter { $0.genre == selectedGenre }
                         ForEach(filtredArtists){ artist in
-                            ArtistCardView(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
+                            ArtistCard(artist: artist, artistImage: artistImages[artist.name] ?? UIImage())
                         }
                     }
                 }
             }
             .fontDesign(.rounded)
-            .background(.black).opacity(0.85)
+            
+            .searchable(text: $searchedArtist)
             .navigationTitle("Artists")
-            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear(){
             api.fetchArtists { artists in
@@ -66,7 +66,26 @@ struct ArtistsView: View {
     }
 }
 
-struct ArtistCardView: View {
+
+struct GenreButton: View {
+    var genre: String
+    var isSelected: Bool
+    var body: some View {
+        Text(genre)
+            .foregroundStyle(isSelected ? .white : .black)
+            .padding(8)
+            .background(isSelected ? .black : .white)
+            .cornerRadius(30)
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Color.black, lineWidth: 1)
+            )
+            .font(.system(.subheadline, design: .rounded))
+            .padding(2)
+    }
+}
+
+struct ArtistCard: View {
     
     var artist: Artist
     let artistImage: UIImage

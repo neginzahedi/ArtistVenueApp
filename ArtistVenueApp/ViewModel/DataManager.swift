@@ -35,4 +35,43 @@ class DataManager: ObservableObject {
             }
         }.resume()
     }
+    
+    
+    // Fetch artist performances (two weeks)
+    func fetchArtistPerformances(artistID: Int, completion: @escaping ([ArtistPerformance]) -> ()){
+        guard let url = URL(string: "\(BASE_URL)/artists/\(artistID)/performances?\(DataManager.currentTwoWeekRange())") else {
+            print("Invalid url...")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let performances = try JSONDecoder().decode([ArtistPerformance].self, from: data)
+                    print(performances)
+                    DispatchQueue.main.async {
+                        completion(performances)
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            } else if let error = error {
+                print("Error fetching data: \(error)")
+            }
+        }.resume()
+    }
+    
+    // Calculate date range for the next two weeks
+    static func currentTwoWeekRange() -> String {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let twoWeeksFromNow = calendar.date(byAdding: .day, value: 13, to: currentDate)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let fromDateString = dateFormatter.string(from: currentDate)
+        let toDateString = dateFormatter.string(from: twoWeeksFromNow!)
+        
+        return "from=\(fromDateString)&to=\(toDateString)"
+    }
 }

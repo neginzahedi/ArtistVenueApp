@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var api = DataManager()
+    @State var artists = [Artist]()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List(artists){ artist in
+            Text(artist.name)
         }
-        .padding()
+        
+        .onAppear(){
+            api.fetchArtists { artists in
+                self.artists = artists
+            }
+        }
     }
 }
 

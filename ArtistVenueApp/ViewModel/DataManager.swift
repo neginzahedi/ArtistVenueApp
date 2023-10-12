@@ -76,6 +76,39 @@ class DataManager: ObservableObject {
         return "from=\(fromDateString)&to=\(toDateString)"
     }
     
+    // Format date
+    static func formatDateString(_ inputDate: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: inputDate) {
+            dateFormatter.dateFormat = "MMM d, yyyy"
+            let formattedDate = dateFormatter.string(from: date)
+            return formattedDate
+        } else {
+            return "Invalid date format"
+        }
+    }
+    
+    // Format time
+    static func formatTimeString(_ inputDate: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: inputDate) {
+            dateFormatter.dateFormat = "h:mm a"
+            let formattedDate = dateFormatter.string(from: date)
+            return formattedDate
+        } else {
+            return "Invalid date format"
+        }
+    }
+    
+    
+    static func sum(first: Int, second: Int) -> Int {
+        return first + second;
+    }
+    
     // Fetch artist image
     func fetchArtistImage(artistName: String, completion: @escaping (UIImage?) -> Void) {
         let imageName = artistName.replacingOccurrences(of: " ", with: "+") + ".png"

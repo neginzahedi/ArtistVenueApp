@@ -25,19 +25,24 @@ struct ArtistsView: View {
             .navigationTitle("Artists")
         }
         .onAppear(){
-            api.fetchArtists { artists in
-                self.artists = artists
-                fetchArtistsImages(artists: artists)
+            Task{
+                do {
+                    self.artists = try await api.fetchArtists()
+                    await fetchArtistsImages(artists: artists)
+                } catch{
+                    print("error fetch artist")
+                }
             }
         }
     }
     
-    private func fetchArtistsImages(artists: [Artist]){
+    private func fetchArtistsImages(artists: [Artist]) async{
         for artist in artists {
-            api.fetchArtistImage(artistName: artist.name) { image in
-                if let image = image{
-                    artistImages[artist.name] = image
-                }
+            do {
+                let image = try await api.fetchImage(url:api.getImageURL(name: artist.name, type: "artists"))
+                self.artistImages[artist.name] = image
+            } catch{
+                print("no image for artist")
             }
         }
     }

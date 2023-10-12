@@ -16,65 +16,41 @@ class DataManager: ObservableObject {
     let BASE_IMG_URL = "https://songleap.s3.amazonaws.com"
     
     // Fetch artists
-    func fetchArtists(completion: @escaping ([Artist]) -> ()) {
+    func fetchArtists() async throws -> [Artist] {
         guard let url = URL(string: "\(BASE_URL)/artists") else {
             print("Invalid url...")
-            return
+            throw URLError(.badURL)
         }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let artists = try JSONDecoder().decode([Artist].self, from: data)
-                    //print(artists)
-                    DispatchQueue.main.async {
-                        completion(artists)
-                    }
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                }
-            } else if let error = error {
-                print("Error fetching data: \(error)")
-            }
-        }.resume()
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let artists = try JSONDecoder().decode([Artist].self, from: data)
+        return artists
     }
     
     // Fetch artist performances (two weeks)
-    func fetchArtistPerformances(artistID: Int, completion: @escaping ([ArtistPerformance]) -> ()){
-        guard let url = URL(string: "\(BASE_URL)/artists/\(artistID)/performances?\(DataManager.currentTwoWeekRange())") else {
+    func fetchArtistPerformances(artistID: Int) async throws -> [ArtistPerformance]{
+        guard let url = URL(string: "\(BASE_URL)/artists/\(artistID)/performances?\(DataManager.twoWeekRange(from: Date()))") else {
             print("Invalid url...")
-            return
+            throw URLError(.badURL)
         }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let performances = try JSONDecoder().decode([ArtistPerformance].self, from: data)
-                    //print(performances)
-                    DispatchQueue.main.async {
-                        completion(performances)
-                    }
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                }
-            } else if let error = error {
-                print("Error fetching data: \(error)")
-            }
-        }.resume()
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let performances = try JSONDecoder().decode([ArtistPerformance].self, from: data)
+        return performances
     }
     
     // Calculate date range for the next two weeks
-    static func currentTwoWeekRange() -> String {
-        let currentDate = Date()
+    static func twoWeekRange(from date: Date) -> String {
         let calendar = Calendar.current
-        let twoWeeksFromNow = calendar.date(byAdding: .day, value: 13, to: currentDate)
+        let twoWeeksFromNow = calendar.date(byAdding: .day, value: 13, to: date)!
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let fromDateString = dateFormatter.string(from: currentDate)
-        let toDateString = dateFormatter.string(from: twoWeeksFromNow!)
+        let fromDateString = dateFormatter.string(from: date)
+        let toDateString = dateFormatter.string(from: twoWeeksFromNow)
         
         return "from=\(fromDateString)&to=\(toDateString)"
     }
+    
     
     // Format date
     static func formatDateString(_ inputDate: String) -> String {
@@ -104,39 +80,21 @@ class DataManager: ObservableObject {
         }
     }
     
-    // Fetch artist image
-    func fetchArtistImage(artistName: String, completion: @escaping (UIImage?) -> Void) {
-        let imageName = artistName.replacingOccurrences(of: " ", with: "+") + ".png"
-        let urlString = "\(BASE_IMG_URL)/artists/\(imageName)"
-        
-        if let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data, let image = UIImage(data: data) {
-                    completion(image)
-                } else {
-                    completion(nil)
-                }
-            }.resume()
-        } else {
-            completion(nil)
+    // Format image url
+    func getImageURL(name: String, type: String) throws -> URL{
+        let imageName = name.replacingOccurrences(of: " ", with: "+") + ".png"
+        let url = "\(BASE_IMG_URL)/\(type)/\(imageName)"
+        guard let url = URL(string: url) else {
+            print("Invalid url...")
+            throw URLError(.badURL)
         }
+        return url
     }
     
-    // Fetch venue image
-    func fetchVenueImage(venueName: String, completion: @escaping (UIImage?) -> Void) {
-        let imageName = venueName.replacingOccurrences(of: " ", with: "+") + ".png"
-        let urlString = "\(BASE_IMG_URL)/venues/\(imageName)"
-        
-        if let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data, let image = UIImage(data: data) {
-                    completion(image)
-                } else {
-                    completion(nil)
-                }
-            }.resume()
-        } else {
-            completion(nil)
-        }
+    // Fetch image
+    func fetchImage(url: URL) async throws -> UIImage? {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let image = UIImage(data: data)
+        return image
     }
 }

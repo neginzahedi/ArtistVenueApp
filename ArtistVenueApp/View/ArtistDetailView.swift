@@ -17,25 +17,25 @@ struct ArtistDetailView: View {
     
     var body: some View {
         PerformancesListView(performances: performances, venueImages : venueImages)
-            .onAppear(){
-                fetchArtistDetail()
-            }
-            .fontDesign(.rounded)
-            .navigationTitle(artist.name)
-    }
-    
-    private func fetchArtistDetail() {
-        api.fetchArtistPerformances(artistID: artist.id) { performances in
-            self.performances = performances
-            
-            for performance in performances {
-                api.fetchVenueImage(venueName: performance.venue.name) { image in
-                    if let image = image {
-                        self.venueImages[performance.venue.name] = image
+            .onAppear {
+                Task{
+                    do {
+                        self.performances =  try await api.fetchArtistPerformances(artistID: artist.id)
+                        for performance in performances {
+                            do {
+                                let image = try await api.fetchImage(url: api.getImageURL(name: performance.venue.name, type: "venues"))
+                                self.venueImages[performance.venue.name] = image
+                            } catch{
+                                print("no image for artist")
+                            }
+                        }
+                    } catch{
+                        print("Error fetch")
                     }
                 }
             }
-        }
+            .fontDesign(.rounded)
+            .navigationTitle(artist.name)
     }
 }
 

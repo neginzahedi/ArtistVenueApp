@@ -15,6 +15,7 @@ struct ArtistDetailView: View {
     
     @State var performances = [ArtistPerformance]()
     @State private var artistImage: UIImage?
+    @State private var venueImages = [String:UIImage]()
     
     var body: some View {
         VStack{
@@ -24,6 +25,10 @@ struct ArtistDetailView: View {
             Text(artist.name)
             List(performances){ performance in
                 HStack{
+                    Image(uiImage: venueImages[performance.venue.name] ?? UIImage())
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
                     Text(performance.venue.name)
                     Text(performance.date)
                 }
@@ -33,6 +38,15 @@ struct ArtistDetailView: View {
         .onAppear(){
             api.fetchArtistPerformances(artistID: artist.id) { performances in
                 self.performances = performances
+                
+                for performance in performances {
+                    
+                    api.fetchVenueImage(venueName: performance.venue.name) { image in
+                        if let image = image {
+                            self.venueImages[performance.venue.name] = image
+                        }
+                    }
+                }
             }
             
             api.fetchArtistImage(artistName: artist.name) { image in

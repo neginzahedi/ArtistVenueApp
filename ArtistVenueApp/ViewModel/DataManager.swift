@@ -25,7 +25,7 @@ class DataManager: ObservableObject {
             if let data = data {
                 do {
                     let artists = try JSONDecoder().decode([Artist].self, from: data)
-                    print(artists)
+                    //print(artists)
                     DispatchQueue.main.async {
                         completion(artists)
                     }
@@ -38,7 +38,6 @@ class DataManager: ObservableObject {
         }.resume()
     }
     
-    
     // Fetch artist performances (two weeks)
     func fetchArtistPerformances(artistID: Int, completion: @escaping ([ArtistPerformance]) -> ()){
         guard let url = URL(string: "\(BASE_URL)/artists/\(artistID)/performances?\(DataManager.currentTwoWeekRange())") else {
@@ -49,7 +48,7 @@ class DataManager: ObservableObject {
             if let data = data {
                 do {
                     let performances = try JSONDecoder().decode([ArtistPerformance].self, from: data)
-                    print(performances)
+                    //print(performances)
                     DispatchQueue.main.async {
                         completion(performances)
                     }

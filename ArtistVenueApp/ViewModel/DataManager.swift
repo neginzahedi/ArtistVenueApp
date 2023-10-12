@@ -104,11 +104,6 @@ class DataManager: ObservableObject {
         }
     }
     
-    
-    static func sum(first: Int, second: Int) -> Int {
-        return first + second;
-    }
-    
     // Fetch artist image
     func fetchArtistImage(artistName: String, completion: @escaping (UIImage?) -> Void) {
         let imageName = artistName.replacingOccurrences(of: " ", with: "+") + ".png"

@@ -21,7 +21,6 @@ struct ArtistsView: View {
                     .padding(.vertical, 15)
                 ArtistsListView(artists: artists, artistImages: artistImages, selectedGenre: selectedGenre)
             }
-            .fontDesign(.rounded)
             .navigationTitle("Artists")
         }
         .onAppear(){

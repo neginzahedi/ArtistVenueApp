@@ -34,7 +34,6 @@ struct ArtistDetailView: View {
                     }
                 }
             }
-            .fontDesign(.rounded)
             .navigationTitle(artist.name)
     }
 }

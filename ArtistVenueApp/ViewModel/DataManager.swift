@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 class DataManager: ObservableObject {
     
     @Published var artists = [Artist]()
     
     let BASE_URL = "http://ec2-44-211-66-223.compute-1.amazonaws.com"
+    let BASE_IMG_URL = "https://songleap.s3.amazonaws.com"
     
     // Fetch artists
     func fetchArtists(completion: @escaping ([Artist]) -> ()) {
@@ -73,5 +75,23 @@ class DataManager: ObservableObject {
         let toDateString = dateFormatter.string(from: twoWeeksFromNow!)
         
         return "from=\(fromDateString)&to=\(toDateString)"
+    }
+    
+    // Fetch artist image
+    func fetchArtistImage(artistName: String, completion: @escaping (UIImage?) -> Void) {
+        let imageName = artistName.replacingOccurrences(of: " ", with: "+") + ".png"
+        let urlString = "\(BASE_IMG_URL)/artists/\(imageName)"
+        
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    completion(image)
+                } else {
+                    completion(nil)
+                }
+            }.resume()
+        } else {
+            completion(nil)
+        }
     }
 }

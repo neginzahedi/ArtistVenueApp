@@ -23,7 +23,7 @@ class DataManager: ObservableObject {
         }
         let (data, _) = try await URLSession.shared.data(from: url)
         let artists = try JSONDecoder().decode([Artist].self, from: data)
-        return artists
+        return artists.sorted(by: { $0.name < $1.name })
     }
     
     // Fetch artist performances (two weeks)

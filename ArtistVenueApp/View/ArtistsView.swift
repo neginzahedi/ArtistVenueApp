@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArtistsView: View {
     
-    @StateObject private var api = DataManager()
+    @ObservedObject private var vm = DataManager.shared
     @State private var artists = [Artist]()
     @State private var artistImages = [String:UIImage]()
     @State private var selectedGenre = "All"
@@ -26,7 +26,7 @@ struct ArtistsView: View {
         .onAppear(){
             Task{
                 do {
-                    self.artists = try await api.fetchArtists()
+                    self.artists = try await vm.fetchArtists()
                     await fetchArtistsImages(artists: artists)
                 } catch{
                     print("error fetch artist")
@@ -38,7 +38,7 @@ struct ArtistsView: View {
     private func fetchArtistsImages(artists: [Artist]) async{
         for artist in artists {
             do {
-                let image = try await api.fetchImage(url:api.getImageURL(name: artist.name, type: "artists"))
+                let image = try await vm.fetchImage(url:vm.getImageURL(name: artist.name, type: "artists"))
                 self.artistImages[artist.name] = image
             } catch{
                 print("no image for artist")

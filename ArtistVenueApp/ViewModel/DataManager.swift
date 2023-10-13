@@ -17,9 +17,14 @@ enum DataManagerError: Error {
 /// - Version: 1.0
 /// - Note: This class handles networking working tasks such as fetching artists, performances, venues, entity images
 class DataManager: ObservableObject {
+    
     // MARK: - Properties
     @Published var artists = [Artist]()
     
+    // MARK: - Singleton
+    static let shared = DataManager()
+    
+    private init(){}
     
     // MARK: - API Routes
     let BASE_URL = "http://ec2-44-211-66-223.compute-1.amazonaws.com"

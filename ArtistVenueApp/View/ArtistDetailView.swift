@@ -11,7 +11,7 @@ struct ArtistDetailView: View {
     
     var artist: Artist
     
-    @StateObject var api = DataManager()
+    @ObservedObject var vm = DataManager.shared
     @State private var performances = [ArtistPerformance]()
     @State private var venueImages = [String:UIImage]()
     
@@ -20,10 +20,10 @@ struct ArtistDetailView: View {
             .onAppear {
                 Task{
                     do {
-                        self.performances =  try await api.fetchArtistPerformances(artistID: artist.id)
+                        self.performances =  try await vm.fetchArtistPerformances(artistID: artist.id)
                         for performance in performances {
                             do {
-                                let image = try await api.fetchImage(url: api.getImageURL(name: performance.venue.name, type: "venues"))
+                                let image = try await vm.fetchImage(url: vm.getImageURL(name: performance.venue.name, type: "venues"))
                                 self.venueImages[performance.venue.name] = image
                             } catch{
                                 print("no image for artist")

@@ -14,7 +14,7 @@ final class ArtistVenueAppTests: XCTestCase {
     
     func testFetchArtists() async {
         // Given
-        let dataManager = DataManager()
+        let dataManager = DataManager.shared
         // When
         let result = try? await dataManager.fetchArtists()
         // Then
@@ -24,7 +24,7 @@ final class ArtistVenueAppTests: XCTestCase {
     
     func testFetchArtistPerformances() async{
         // Given
-        let dataManager = DataManager()
+        let dataManager = DataManager.shared
         // When
         let result = try? await dataManager.fetchArtistPerformances(artistID: 4)
         // Then
@@ -34,7 +34,7 @@ final class ArtistVenueAppTests: XCTestCase {
     
     func testFetchImage() async{
         // Given
-        let dataManager = DataManager()
+        let dataManager = DataManager.shared
         let invalidURL = URL(string: "\(dataManager.BASE_IMG_URL)/v/The+Dive.png")
         let validURL = URL(string: "\(dataManager.BASE_IMG_URL)/venues/The+Dive.png")
         // When
@@ -82,7 +82,7 @@ final class ArtistVenueAppTests: XCTestCase {
     
     func testGetImageURL(){
         // Given
-        let dataManager = DataManager()
+        let dataManager = DataManager.shared
         // When
         let result = try? dataManager.getImageURL(name: "The Dive", type: "venues")
         // Then

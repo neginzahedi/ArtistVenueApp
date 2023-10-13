@@ -16,7 +16,18 @@
 		0FB7C3752AD83910002A3ED5 /* ArtistPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3742AD83910002A3ED5 /* ArtistPerformance.swift */; };
 		0FB7C3782AD83A14002A3ED5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3772AD83A14002A3ED5 /* DataManager.swift */; };
 		0FB7C37D2AD83EE2002A3ED5 /* ArtistDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C37C2AD83EE2002A3ED5 /* ArtistDetailView.swift */; };
+		0FB7C3852AD87F75002A3ED5 /* ArtistVenueAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7C3842AD87F75002A3ED5 /* ArtistVenueAppTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0FB7C3862AD87F75002A3ED5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0FB7C3572AD8367C002A3ED5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0FB7C35E2AD8367C002A3ED5;
+			remoteInfo = ArtistVenueApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0FB7C35F2AD8367C002A3ED5 /* ArtistVenueApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtistVenueApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,10 +41,19 @@
 		0FB7C3772AD83A14002A3ED5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0FB7C37B2AD83A9A002A3ED5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0FB7C37C2AD83EE2002A3ED5 /* ArtistDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailView.swift; sourceTree = "<group>"; };
+		0FB7C3822AD87F75002A3ED5 /* ArtistVenueAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtistVenueAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FB7C3842AD87F75002A3ED5 /* ArtistVenueAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistVenueAppTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0FB7C35C2AD8367C002A3ED5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FB7C37F2AD87F75002A3ED5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				0FB7C3612AD8367C002A3ED5 /* ArtistVenueApp */,
+				0FB7C3832AD87F75002A3ED5 /* ArtistVenueAppTests */,
 				0FB7C3602AD8367C002A3ED5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				0FB7C35F2AD8367C002A3ED5 /* ArtistVenueApp.app */,
+				0FB7C3822AD87F75002A3ED5 /* ArtistVenueAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +130,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0FB7C3832AD87F75002A3ED5 /* ArtistVenueAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				0FB7C3842AD87F75002A3ED5 /* ArtistVenueAppTests.swift */,
+			);
+			path = ArtistVenueAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,6 +158,24 @@
 			productReference = 0FB7C35F2AD8367C002A3ED5 /* ArtistVenueApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0FB7C3812AD87F75002A3ED5 /* ArtistVenueAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FB7C3882AD87F75002A3ED5 /* Build configuration list for PBXNativeTarget "ArtistVenueAppTests" */;
+			buildPhases = (
+				0FB7C37E2AD87F75002A3ED5 /* Sources */,
+				0FB7C37F2AD87F75002A3ED5 /* Frameworks */,
+				0FB7C3802AD87F75002A3ED5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0FB7C3872AD87F75002A3ED5 /* PBXTargetDependency */,
+			);
+			name = ArtistVenueAppTests;
+			productName = ArtistVenueAppTests;
+			productReference = 0FB7C3822AD87F75002A3ED5 /* ArtistVenueAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -140,6 +188,10 @@
 				TargetAttributes = {
 					0FB7C35E2AD8367C002A3ED5 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					0FB7C3812AD87F75002A3ED5 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 0FB7C35E2AD8367C002A3ED5;
 					};
 				};
 			};
@@ -157,6 +209,7 @@
 			projectRoot = "";
 			targets = (
 				0FB7C35E2AD8367C002A3ED5 /* ArtistVenueApp */,
+				0FB7C3812AD87F75002A3ED5 /* ArtistVenueAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -168,6 +221,13 @@
 			files = (
 				0FB7C36A2AD8367D002A3ED5 /* Preview Assets.xcassets in Resources */,
 				0FB7C3672AD8367D002A3ED5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FB7C3802AD87F75002A3ED5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +248,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0FB7C37E2AD87F75002A3ED5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FB7C3852AD87F75002A3ED5 /* ArtistVenueAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0FB7C3872AD87F75002A3ED5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0FB7C35E2AD8367C002A3ED5 /* ArtistVenueApp */;
+			targetProxy = 0FB7C3862AD87F75002A3ED5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0FB7C36B2AD8367D002A3ED5 /* Debug */ = {
@@ -243,7 +319,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -300,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -378,6 +454,42 @@
 			};
 			name = Release;
 		};
+		0FB7C3892AD87F75002A3ED5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 66MQ5QVH5G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neginzahedi.ArtistVenueAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtistVenueApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArtistVenueApp";
+			};
+			name = Debug;
+		};
+		0FB7C38A2AD87F75002A3ED5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 66MQ5QVH5G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.neginzahedi.ArtistVenueAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtistVenueApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ArtistVenueApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -395,6 +507,15 @@
 			buildConfigurations = (
 				0FB7C36E2AD8367D002A3ED5 /* Debug */,
 				0FB7C36F2AD8367D002A3ED5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FB7C3882AD87F75002A3ED5 /* Build configuration list for PBXNativeTarget "ArtistVenueAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FB7C3892AD87F75002A3ED5 /* Debug */,
+				0FB7C38A2AD87F75002A3ED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

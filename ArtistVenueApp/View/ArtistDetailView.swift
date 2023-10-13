@@ -75,9 +75,12 @@ struct VenueCard: View {
                 .frame(width: 80, height: 80)
             VStack(alignment: .leading) {
                 HStack{
-                    Text(DataManager.formatDateString(performance.date))
+                    let date = try? DataManager.formatDateString(performance.date)
+                    let time = try? DataManager.formatTimeString(performance.date)
+                    
+                    Text(date ?? "")
                         .bold()
-                    Text(DataManager.formatTimeString(performance.date))
+                    Text(time ?? "")
                         .foregroundStyle(.secondary)
                 }
                 Text(performance.venue.name)

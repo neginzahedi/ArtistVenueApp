@@ -66,7 +66,7 @@ final class ArtistVenueAppTests: XCTestCase {
         // Given
         let expectedOutput = "6:00 PM"
         // When
-        let result = DataManager.formatTimeString("2026-08-02T18:00:00")
+        let result = try? DataManager.formatTimeString("2026-08-02T18:00:00")
         // Then
         XCTAssertEqual(result, expectedOutput, "Time hr is not formatted properly")
     }
@@ -75,7 +75,7 @@ final class ArtistVenueAppTests: XCTestCase {
         // Given
         let expectedOutput = "Aug 2, 2026"
         // When
-        let result = DataManager.formatDateString("2026-08-02T18:00:00")
+        let result = try? DataManager.formatDateString("2026-08-02T18:00:00")
         // Then
         XCTAssertEqual(result, expectedOutput, "Date is not formatted properly")
     }
